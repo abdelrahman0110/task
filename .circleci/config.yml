@@ -37,4 +37,5 @@ jobs:
           command: |
             docker build . -t seqtolang
             sleep 90
-            sudo docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" seqtolang >> resulte.txt
+            docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" --rm seqtolang >> resulte.txt
+            cat resulte.txt
