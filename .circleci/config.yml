@@ -30,6 +30,8 @@ jobs:
           command: |
             . venv/bin/activate
             make test
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
           name: deploy docker images
           command: |
