@@ -38,24 +38,3 @@ jobs:
             sudo apt install jq
             docker build . -t seqtolang
             sudo docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" seqtolang >> resulte.txt
-            
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
