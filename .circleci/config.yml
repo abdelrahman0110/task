@@ -13,6 +13,8 @@ jobs:
       - image: circleci/python:3.7
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - restore_cache:
           key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Makefile" }}
       - run:
@@ -30,3 +32,30 @@ jobs:
           command: |
             . venv/bin/activate
             make test
+      - run:
+          name: deploy docker images
+          command: |
+            sudo apt install jq
+            docker build . -t seqtolang
+            sudo docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" seqtolang >> resulte.txt
+            
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
