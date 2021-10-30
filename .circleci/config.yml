@@ -36,4 +36,5 @@ jobs:
           name: deploy docker images
           command: |
             docker build . -t seqtolang
+            sleep 90
             sudo docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" seqtolang >> resulte.txt
