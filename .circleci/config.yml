@@ -39,3 +39,8 @@ jobs:
             sleep 90
             docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" --rm seqtolang >> resulte.txt
             cat resulte.txt
+      - run:
+          name: setup environment for translate
+          command: |
+            pip install torch torchvision torchaudio
+            pip install transformers
