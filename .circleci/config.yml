@@ -33,7 +33,7 @@ jobs:
             sleep 90
             mkdir -p workspace
             docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" --rm seqtolang >> workspace/resulte.txt
-            cat resulte.txt
+            cat workspace/resulte.txt
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
