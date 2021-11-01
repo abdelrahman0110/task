@@ -58,10 +58,10 @@ jobs:
           name: write a traslation code 
           command: |
             echo "from transformers import pipeline
-            translator = pipeline("translation_en_to_de")
+            translator = pipeline(\"translation_en_to_de\")
             text = \"Hello my friends! How are you doing today?\"
             translation = translator(text)
-            print(translation)" >> py.py
+            print(translation)" > py.py
       - run:
           name: run 
           command: |
