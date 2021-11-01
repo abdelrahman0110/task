@@ -45,7 +45,6 @@ jobs:
     steps:
       - attach_workspace:
           at: workspace
-      - checkout
       - run:
           name: setup environment for translate
           command: |
