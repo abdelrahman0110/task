@@ -35,6 +35,7 @@ jobs:
             docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" --rm seqtolang >> workspace/resulte.txt
             cat workspace/resulte.txt
             pwd
+            ls
       - persist_to_workspace:
           root: workspace
           paths:
