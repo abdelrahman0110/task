@@ -66,6 +66,7 @@ jobs:
           name: run 
           command: |
             python py.py
+            ls
 
 
 
