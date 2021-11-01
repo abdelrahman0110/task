@@ -36,6 +36,7 @@ jobs:
             cat workspace/resulte.txt
             pwd
             ls
+            ls workspace
       - persist_to_workspace:
           root: workspace
           paths:
