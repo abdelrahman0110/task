@@ -56,12 +56,11 @@ jobs:
       - run:
           name: write a traslation code 
           command: |
-            echo "from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
-            model = AutoModelForSeq2SeqLM.from_pretrained(\"t5-base\")
-            tokenizer = AutoTokenizer.from_pretrained(\"t5-base\")
-            inputs = tokenizer( \"translate German to English : Hugging Face ist ein Technologieunternehmen mit Sitz in New York und Paris.\", return_tensors=\"pt\" )
-            outputs = model.generate(inputs[\"input_ids\"], max_length=40, num_beams=4, early_stopping=True)
-            print(tokenizer.decode(outputs[0]))" > py.py
+            echo "from transformers import pipeline
+            translator = pipeline(\"translation_en_to_fr\")
+            text = \"Hello my friends! How are you doing today?\"
+            translation = translator(text)
+            print(translation)" > py.py
       - run:
           name: run 
           command: |
