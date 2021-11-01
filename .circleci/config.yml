@@ -58,7 +58,7 @@ jobs:
           command: |
             echo "from transformers import pipeline
             translator = pipeline(\"translation_en_to_fr\")
-            text = \"Hello my friends! How are you doing today?\"
+            text = \"Bonjour, mes amis, comment allez-vous aujourd'hui?\"
             translation = translator(text)
             print(translation)" > py.py
       - run:
