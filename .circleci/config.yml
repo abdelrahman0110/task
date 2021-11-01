@@ -35,10 +35,7 @@ jobs:
             docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" --rm seqtolang >> workspace/resulte.txt
             cat workspace/resulte.txt
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
           root: workspace
-          # Must be relative path from root
           paths:
             - resulte.txt
 
@@ -47,7 +44,7 @@ jobs:
       - image: circleci/python:3.7
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: workspace
       - checkout
       - run:
           name: setup environment for translate
