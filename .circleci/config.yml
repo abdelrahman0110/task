@@ -1,11 +1,5 @@
 version: 2.1
-workflows:
-  build_and_deploy:
-    jobs:
-      - build:
-          filters:
-            tags:
-              only: /.*/
+
 
 jobs:
   build:
@@ -37,10 +31,48 @@ jobs:
           command: |
             docker build . -t seqtolang
             sleep 90
-            docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" --rm seqtolang >> resulte.txt
+            docker run --env "SEQTOLANG_TEXT=$(jq .review_text sample_0.json)" --rm seqtolang >> workspace/resulte.txt
             cat resulte.txt
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - resulte.txt
+
+  build-translate:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - checkout
       - run:
           name: setup environment for translate
           command: |
             pip install torch torchvision torchaudio
             pip install transformers
+      - run:
+          name: write a traslation code 
+          command: |
+            echo "from transformers import pipeline
+            translator = pipeline("translation_en_to_de")
+            text = "Hello my friends! How are you doing today?"
+            translation = translator(text)
+            print(translation)" >> py.py
+      - run:
+          name: run 
+          command: |
+            python py.py
+
+
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/ 
+      - build-translate
